@@ -5,26 +5,53 @@
 def order(values: list = None) -> list:
     if values is None:
         # TODO: demander les valeurs ici
-        pass
+        valeurs = input("Entrez 10 valeurs (entier, float, str) séparées par des espaces : ")
 
-    return []
+        valueList = valeurs.split()
+        valueList.sort()
+
+    return valueList
 
 
 def anagrams(words: list = None) -> bool:
     if words is None:
         # TODO: demander les mots ici
-        pass
-
-    return False
+        mots = input("Entrez les deux mots séparés d'un espace : ")
+        mots = mots.split()
+        print(mots[0][::-1])
+        print(mots[0][::-1] == mots[1])
+    return mots[0][::-1] == mots[1]
 
 
 def contains_doubles(items: list) -> bool:
-    return False
+    hasDoubles = False
+    for i, item in enumerate(items):
+        for j, element in enumerate(items):
+            if i != j and item == element:
+                hasDoubles = True
+
+    return hasDoubles
 
 
 def best_grades(student_grades: dict) -> dict:
     # TODO: Retourner un dictionnaire contenant le nom de l'étudiant ayant la meilleure moyenne ainsi que sa moyenne
-    return {}
+    moyenne = 0
+    listeMoyenne = {}
+    for clé in student_grades:
+        for grade in student_grades[clé]:
+            moyenne += grade
+        moyenne /= len(student_grades[clé])
+        listeMoyenne[clé] = moyenne
+        moyenne = 0
+    print(listeMoyenne)
+    meilleurMoyenne = 0
+    for studentKey in listeMoyenne:
+        meilleurMoyenne = listeMoyenne[studentKey]
+        for otherStudentKey in listeMoyenne:
+            if listeMoyenne[otherStudentKey] > meilleurMoyenne:
+                meilleurMoyenne = otherStudentKey
+    bestStudent = {otherStudentKey: meilleurMoyenne}
+    return bestStudent
 
 
 def frequence(sentence: str) -> dict:
